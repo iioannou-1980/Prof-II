@@ -1,0 +1,11 @@
+# robots.txt for www.ioannou.us
+# Professor Ioannis Ioannou - Official Website
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.ioannou.us/sitemap.xml
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 1
