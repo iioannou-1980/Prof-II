@@ -195,6 +195,11 @@ p:last-child {
 @media (min-width: 1024px) {
     .nav-menu {
         display: flex;
+        position: fixed;
+        top: 0;
+        right: var(--space-2xl);
+        height: 72px;
+        z-index: 1001;
     }
 }
 
