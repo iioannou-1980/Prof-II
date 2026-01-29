@@ -13,54 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.toggle('is-active');
             navToggle.classList.toggle('is-active');
             
-            // Directly set background when menu is active
-            if (navMenu.classList.contains('is-active')) {
-                navMenu.style.backgroundColor = '#ffffff';
-                navMenu.style.background = '#ffffff';
-            }
-            
             // Toggle aria-expanded
             const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
             navToggle.setAttribute('aria-expanded', !isExpanded);
         });
-        
-        // Set initial mobile menu styles via JavaScript
-        if (window.innerWidth < 1024) {
-            navMenu.style.cssText = `
-                display: flex;
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: #ffffff;
-                background-color: #ffffff;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 2rem;
-                gap: 2rem;
-                z-index: 99999;
-                visibility: hidden;
-                opacity: 0;
-                transition: opacity 0.3s ease, visibility 0.3s ease;
-            `;
-        }
     }
-    
-    // Override is-active class behavior
-    const style = document.createElement('style');
-    style.textContent = `
-        @media (max-width: 1023px) {
-            .nav-menu.is-active {
-                visibility: visible !important;
-                opacity: 1 !important;
-                background: #ffffff !important;
-                background-color: #ffffff !important;
-            }
-        }
-    `;
-    document.head.appendChild(style);
     
     // Header scroll effect
     const header = document.querySelector('.site-header');
@@ -117,3 +74,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
 });
+
+// Add mobile menu styles dynamically
+const mobileStyles = `
+    @media (max-width: 1023px) {
+        .nav-menu {
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 2rem;
+            gap: 1.5rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-menu.is-active {
+            display: flex;
+            transform: translateX(0);
+        }
+        
+        .nav-menu a {
+            font-size: 1.25rem;
+        }
+        
+        .nav-toggle.is-active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .nav-toggle.is-active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav-toggle.is-active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+    }
+`;
+
+const styleSheet = document.createElement('style');
+styleSheet.textContent = mobileStyles;
+document.head.appendChild(styleSheet);
