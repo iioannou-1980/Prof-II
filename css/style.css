@@ -200,14 +200,14 @@ p:last-child {
         left: 0;
         right: 0;
         bottom: 0;
-        background: #ffffff;
+        background: #ffffff !important;
         flex-direction: column;
         justify-content: flex-start;
         padding: 2rem;
         gap: 1.5rem;
         transform: translateX(100%);
         transition: transform 0.3s ease;
-        z-index: 999;
+        z-index: 9999;
     }
     
     .nav-menu.is-active {
@@ -350,6 +350,7 @@ p:last-child {
     align-items: center;
     padding: calc(72px + var(--space-3xl)) 0 var(--space-4xl);
     overflow: hidden;
+    z-index: 1;
 }
 
 .hero-background {
