@@ -195,6 +195,37 @@ p:last-child {
     padding: 0;
 }
 
+/* Mobile menu styles */
+@media (max-width: 1023px) {
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: white;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        z-index: 9999;
+    }
+    
+    .nav-menu.is-active {
+        display: flex;
+    }
+    
+    .nav-menu li {
+        list-style: none;
+    }
+    
+    .nav-menu a {
+        font-size: 1.25rem;
+        color: #1a365d;
+    }
+}
+
 @media (min-width: 1024px) {
     .nav-menu {
         display: flex;
