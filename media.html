@@ -28,6 +28,38 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Mobile Menu Fix -->
+    <style>
+        @media (max-width: 1023px) {
+            .nav-menu {
+                display: flex !important;
+                position: fixed !important;
+                top: 72px !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                background: #ffffff !important;
+                flex-direction: column !important;
+                justify-content: flex-start !important;
+                padding: 2rem !important;
+                gap: 1.5rem !important;
+                transform: translateX(100%) !important;
+                transition: transform 0.3s ease !important;
+                z-index: 9999 !important;
+            }
+            .nav-menu.is-active {
+                transform: translateX(0) !important;
+            }
+            .nav-menu a {
+                font-size: 1.25rem !important;
+                color: #1a202c !important;
+            }
+            .hero {
+                z-index: 1 !important;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
