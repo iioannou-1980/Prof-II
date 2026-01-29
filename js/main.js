@@ -84,14 +84,14 @@ const mobileStyles = `
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            background: #ffffff;
             flex-direction: column;
             justify-content: flex-start;
             padding: 2rem;
             gap: 1.5rem;
             transform: translateX(100%);
             transition: transform 0.3s ease;
+            z-index: 999;
         }
         
         .nav-menu.is-active {
