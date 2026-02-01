@@ -919,13 +919,14 @@ function exportReflections() {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@page{margin:2cm 2.2cm;size:A4}
+@page{margin:0;size:A4}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Source Sans 3',Helvetica,Arial,sans-serif;max-width:100%;margin:0 auto;padding:0;color:#1a202c;line-height:1.65;font-size:10.5pt}
-.pdf-header{background:#1a202c;color:#fff;padding:48px 36px 32px;margin:-2.2cm -2.2cm 28px;width:calc(100% + 4.4cm)}
+.pdf-header{background:#1a202c;color:#fff;padding:40px 48px 32px;margin:0 0 28px;width:100%}
 .pdf-header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:26pt;font-weight:500;margin-bottom:4px;color:#fff}
 .pdf-header .sub{font-size:11pt;color:rgba(255,255,255,0.65);font-weight:300}
 .pdf-header .date{font-size:8.5pt;color:rgba(255,255,255,0.4);margin-top:8px}
+.pdf-body{padding:0 48px}
 .summary-row{display:flex;gap:24px;margin:20px 0 24px;padding:18px 24px;background:#f7fafc;border-radius:6px;border:1px solid #e2e8f0}
 .summary-row .stat{flex:1;text-align:center}
 .summary-row .stat-num{font-family:'Cormorant Garamond',Georgia,serif;font-size:28pt;font-weight:700;color:#1a365d}
@@ -966,6 +967,9 @@ h3{font-family:'Source Sans 3',sans-serif;color:#2c5282;font-size:10.5pt;font-we
     html += '<div class="sub">My Playbook Reflections</div>';
     html += `<div class="date">Generated ${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</div>`;
     html += '</div>';
+
+    // Wrap remaining content in pdf-body for padding
+    html += '<div class="pdf-body">';
 
     // Summary stats
     if (count > 0) {
@@ -1013,6 +1017,7 @@ h3{font-family:'Source Sans 3',sans-serif;color:#2c5282;font-size:10.5pt;font-we
     });
 
     html += '<div class="pdf-footer"><p>From &ldquo;Holding the Line: A Playbook for ESG Leadership in Hostile Terrain&rdquo;</p><p>&copy; 2026 Professor Ioannis Ioannou. All rights reserved. &middot; <a href="https://www.ioannou.us">ioannou.us</a></p></div>';
+    html += '</div>'; // close pdf-body
     html += '</body></html>';
 
     // Open in new window for print-to-PDF
