@@ -627,7 +627,7 @@ p:last-child {
 }
 
 .latest-header-full h2 {
-    font-size: var(--text-2xl);
+    font-size: var(--text-3xl);
     color: var(--color-primary);
 }
 
@@ -802,6 +802,14 @@ p:last-child {
 .research-highlight {
     padding: var(--space-5xl) 0;
     background: var(--color-bg-warm);
+}
+
+/* --------------------------------------------------------------------------
+   Featured Article Section
+   -------------------------------------------------------------------------- */
+.article-highlight {
+    padding: var(--space-5xl) 0;
+    background: var(--color-bg);
 }
 
 .research-grid {
@@ -993,6 +1001,10 @@ p:last-child {
 .advisory-section {
     padding: var(--space-4xl) 0;
     background: var(--color-bg-subtle);
+}
+
+.advisory-section .section-title {
+    font-size: var(--text-3xl);
 }
 
 .advisory-grid {
