@@ -227,13 +227,13 @@
 .thought-leadership-intro-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-3xl);
+    gap: var(--space-2xl);
     align-items: center;
 }
 
 @media (min-width: 768px) {
     .thought-leadership-intro-grid {
-        grid-template-columns: 1fr 300px;
+        grid-template-columns: 1fr 220px;
     }
 }
 
@@ -320,6 +320,47 @@
 /* --------------------------------------------------------------------------
    Thought Leadership Page
    -------------------------------------------------------------------------- */
+/* Playbook Feature */
+.playbook-feature {
+    /* no max-width — runs full container width */
+}
+
+/* Tighter spacing between intro and playbook on thought leadership page */
+.tl-intro-compact {
+    padding-bottom: var(--space-2xl);
+}
+
+.tl-playbook-feature {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+    background: var(--color-bg-subtle);
+}
+
+.playbook-feature h2 {
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+}
+
+.playbook-feature p {
+    font-size: var(--text-base);
+    color: var(--color-text-light);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+}
+
+.playbook-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: center;
+    margin-top: var(--space-xl);
+}
+
+.tl-playbook-feature + .opeds-section {
+    padding-top: var(--space-4xl);
+}
+
 .opeds-section {
     padding: var(--space-4xl) 0;
 }
