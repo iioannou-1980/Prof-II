@@ -488,7 +488,7 @@ p:last-child {
    Introduction Section
    -------------------------------------------------------------------------- */
 .intro-section {
-    padding: var(--space-5xl) 0;
+    padding: var(--space-4xl) 0;
     background: var(--color-bg);
 }
 
@@ -531,7 +531,7 @@ p:last-child {
    Featured / Expertise Section
    -------------------------------------------------------------------------- */
 .featured-section {
-    padding: var(--space-5xl) 0;
+    padding: var(--space-4xl) 0;
     background: var(--color-bg-subtle);
 }
 
@@ -601,7 +601,7 @@ p:last-child {
    Latest Section (News & Events)
    -------------------------------------------------------------------------- */
 .latest-section {
-    padding: var(--space-5xl) 0;
+    padding: var(--space-4xl) 0;
     background: var(--color-bg);
 }
 
@@ -800,7 +800,7 @@ p:last-child {
    Research Highlight Section
    -------------------------------------------------------------------------- */
 .research-highlight {
-    padding: var(--space-5xl) 0;
+    padding: var(--space-4xl) 0;
     background: var(--color-bg-warm);
 }
 
@@ -808,7 +808,7 @@ p:last-child {
    Featured Article Section
    -------------------------------------------------------------------------- */
 .article-highlight {
-    padding: var(--space-5xl) 0;
+    padding: var(--space-4xl) 0;
     background: var(--color-bg);
 }
 
