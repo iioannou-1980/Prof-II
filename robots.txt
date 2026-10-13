@@ -2,6 +2,8 @@
 # Professor Ioannis Ioannou - Official Website
 
 User-agent: *
+# Keep the CV PDF out of search results (any file whose name starts with this prefix)
+Disallow: /docs/Ioannis_Ioannou_CV
 Allow: /
 
 # Sitemap location
