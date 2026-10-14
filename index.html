@@ -139,11 +139,17 @@
                 <div class="hero-image">
                     <div class="hero-film">
                         <div class="hero-film-frame">
-                            <button class="film-player" type="button" data-film-open aria-label="Watch the full film with sound">
-                                <video class="film-loop" muted loop playsinline preload="none" poster="images/film-poster.jpg" aria-hidden="true">
+                            <div class="film-player">
+                                <video class="film-loop" autoplay muted loop playsinline preload="auto" poster="images/film-poster.jpg" aria-hidden="true">
                                     <source src="video/film-loop.mp4" type="video/mp4">
                                 </video>
-                            </button>
+                                <button class="film-open" type="button" data-film-open aria-label="Watch the full film with sound"></button>
+                                <button class="film-sound-toggle" type="button" aria-pressed="false" aria-label="Turn sound on">
+                                    <svg class="icon-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                                    <svg class="icon-sound" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+                                    <svg class="icon-play" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><polygon points="7 4 20 12 7 20" fill="currentColor"/></svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="hero-film-row">
                             <button class="film-sound-btn" type="button" data-film-open>
@@ -476,14 +482,42 @@
         var box = document.getElementById('film-lightbox');
         if (!video || !box) return;
         var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        var player = video.closest('.film-player');
+        var soundBtn = document.querySelector('.film-sound-toggle');
         var lightboxOpen = false;
-        function play() {
-            if (reduceMotion.matches || lightboxOpen) return;
-            var p = video.play();
-            if (p && p.catch) p.catch(function () {});
+        var visitorStarted = false;
+        video.muted = true;
+        function setSound(on) {
+            video.muted = !on;
+            soundBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+            soundBtn.setAttribute('aria-label', player.classList.contains('show-play') ? 'Play the film' : (on ? 'Turn sound off' : 'Turn sound on'));
         }
-        // Start after the rest of the page has loaded, so the page stays fast
+        // When a phone blocks the loop (for example in Low Power Mode), show a play button on the still
+        function showPlayButton(on) {
+            player.classList.toggle('show-play', on);
+            soundBtn.setAttribute('aria-label', on ? 'Play the film' : (video.muted ? 'Turn sound on' : 'Turn sound off'));
+        }
+        function play() {
+            if (lightboxOpen) return;
+            if (reduceMotion.matches && !visitorStarted) { video.pause(); showPlayButton(true); return; }
+            var p = video.play();
+            if (p && p.then) p.then(function () { showPlayButton(false); }).catch(function () { showPlayButton(true); });
+        }
+        video.addEventListener('playing', function () { showPlayButton(false); });
+        // Speaker button: sound on restarts the loop from the beginning; sound off mutes it again
+        soundBtn.addEventListener('click', function () {
+            var turnOn = video.muted;
+            visitorStarted = true;
+            setSound(turnOn);
+            if (turnOn) video.currentTime = 0;
+            var p = video.play();
+            if (p && p.then) p.then(function () { showPlayButton(false); }).catch(function () { setSound(false); });
+        });
+        // Try again once the film has faded in, once the page has loaded, and when the visitor returns to the tab
+        var filmBox = document.querySelector('.hero-film');
+        if (filmBox) filmBox.addEventListener('animationend', play);
         if (document.readyState === 'complete') play(); else window.addEventListener('load', play);
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) play(); });
         // Pause the loop while it is scrolled out of view
         if ('IntersectionObserver' in window) {
             new IntersectionObserver(function (entries) {
@@ -497,6 +531,7 @@
             lastTrigger = e.currentTarget;
             lightboxOpen = true;
             video.pause();
+            setSound(false);
             holder.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/KGAWMn2NLMM?autoplay=1&rel=0&playsinline=1" title="How controlling AI is key to achieving true sustainability" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
             box.hidden = false;
             document.body.style.overflow = 'hidden';
