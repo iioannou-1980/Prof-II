@@ -807,3 +807,8 @@
 .form-submit {
     align-self: flex-start;
 }
+
+/* Thought Leadership: even space above and below the opening section (October 2026) */
+.tl-intro-compact {
+    padding-top: var(--space-3xl);
+}

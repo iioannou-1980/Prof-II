@@ -1583,7 +1583,21 @@ p:last-child {
 }
 
 /* --------------------------------------------------------------------------
-   Phones: tighter vertical spacing (computers and tablets unchanged)
+   Computers and tablets: tighter vertical spacing (October 2026)
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+    :root {
+        --space-3xl: 3rem;
+        --space-4xl: 4.5rem;
+        --space-5xl: 6rem;
+    }
+    .hero {
+        min-height: auto;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Phones: tighter vertical spacing
    -------------------------------------------------------------------------- */
 @media (max-width: 767px) {
     :root {
