@@ -212,6 +212,10 @@
     }
 }
 
+.names-strip-label .nowrap {
+    white-space: nowrap;
+}
+
 .names-viewport {
     margin-top: 14px;
     overflow: hidden;
