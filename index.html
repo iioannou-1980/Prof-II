@@ -137,8 +137,22 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="hero-image-wrapper">
-                        <img src="images/hero-portrait.jpg" alt="Professor Ioannis Ioannou">
+                    <div class="hero-film">
+                        <div class="hero-film-frame">
+                            <button class="film-player" type="button" data-film-open aria-label="Watch the full film with sound">
+                                <video class="film-loop" muted loop playsinline preload="none" poster="images/film-poster.jpg" aria-hidden="true">
+                                    <source src="video/film-loop.mp4" type="video/mp4">
+                                </video>
+                            </button>
+                        </div>
+                        <div class="hero-film-row">
+                            <p class="hero-film-caption"><strong>New film from London Business School</strong> · 3:30</p>
+                            <button class="film-sound-btn" type="button" data-film-open>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg>
+                                Watch all three predictions
+                            </button>
+                        </div>
+                        <p class="hero-film-text">In a short film for London Business School, I share three predictions for the future of business, technology and society, and the role each of us can play in shaping them.</p>
                     </div>
                 </div>
             </div>
@@ -449,6 +463,59 @@
     document.getElementById('featured-title').textContent = randomPaper.title;
     document.getElementById('featured-description').textContent = randomPaper.description;
     document.getElementById('featured-meta').textContent = randomPaper.meta;
+    </script>
+
+    <div class="film-lightbox" id="film-lightbox" role="dialog" aria-modal="true" aria-label="How controlling AI is key to achieving true sustainability" hidden>
+        <button class="film-close" type="button" aria-label="Close the film">&times;</button>
+        <div class="film-lightbox-player"></div>
+    </div>
+
+    <script>
+    // Home page film: silent loop in the hero, full film with sound on request
+    (function () {
+        var video = document.querySelector('.film-loop');
+        var box = document.getElementById('film-lightbox');
+        if (!video || !box) return;
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        var lightboxOpen = false;
+        function play() {
+            if (reduceMotion.matches || lightboxOpen) return;
+            var p = video.play();
+            if (p && p.catch) p.catch(function () {});
+        }
+        // Start after the rest of the page has loaded, so the page stays fast
+        if (document.readyState === 'complete') play(); else window.addEventListener('load', play);
+        // Pause the loop while it is scrolled out of view
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) { if (e.isIntersecting) play(); else video.pause(); });
+            }, { threshold: 0.2 }).observe(video);
+        }
+        var holder = box.querySelector('.film-lightbox-player');
+        var closeBtn = box.querySelector('.film-close');
+        var lastTrigger = null;
+        function openFilm(e) {
+            lastTrigger = e.currentTarget;
+            lightboxOpen = true;
+            video.pause();
+            holder.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/KGAWMn2NLMM?autoplay=1&rel=0&playsinline=1" title="How controlling AI is key to achieving true sustainability" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+            box.hidden = false;
+            document.body.style.overflow = 'hidden';
+            closeBtn.focus();
+        }
+        function closeFilm() {
+            holder.innerHTML = '';
+            box.hidden = true;
+            document.body.style.overflow = '';
+            lightboxOpen = false;
+            play();
+            if (lastTrigger) lastTrigger.focus();
+        }
+        document.querySelectorAll('[data-film-open]').forEach(function (b) { b.addEventListener('click', openFilm); });
+        closeBtn.addEventListener('click', closeFilm);
+        box.addEventListener('click', function (e) { if (e.target === box) closeFilm(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) closeFilm(); });
+    })();
     </script>
 
     <script src="js/main.js"></script>

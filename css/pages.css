@@ -224,6 +224,27 @@
     line-height: 1.8;
 }
 
+/* Research intro with portrait */
+.research-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+}
+
+@media (min-width: 900px) {
+    .research-intro-grid {
+        grid-template-columns: 1fr 380px;
+        gap: var(--space-4xl);
+    }
+}
+
+.research-intro-image img {
+    width: 100%;
+    max-width: 480px;
+    box-shadow: var(--shadow-lg);
+}
+
 /* Thought Leadership intro with image */
 .thought-leadership-intro-grid {
     display: grid;
