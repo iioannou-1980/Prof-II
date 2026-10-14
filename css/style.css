@@ -621,6 +621,7 @@ p:last-child {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    gap: var(--space-md);
     margin-bottom: var(--space-2xl);
     padding-bottom: var(--space-md);
     border-bottom: 2px solid var(--color-primary);
@@ -664,6 +665,7 @@ p:last-child {
     color: var(--color-accent);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    white-space: nowrap;
 }
 
 .view-all:hover {
@@ -1218,6 +1220,7 @@ p:last-child {
 
 .advisory-section .section-title {
     font-size: var(--text-3xl);
+    margin-bottom: var(--space-3xl);
 }
 
 .advisory-grid {
@@ -1576,5 +1579,28 @@ p:last-child {
 @media (max-width: 900px) {
     .course-section-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Phones: tighter vertical spacing (computers and tablets unchanged)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+    :root {
+        --space-3xl: 2.5rem;
+        --space-4xl: 3.5rem;
+        --space-5xl: 4.5rem;
+    }
+    .hero {
+        min-height: auto;
+    }
+    .hero-cta:last-child {
+        margin-bottom: 0;
+    }
+    .intro-grid {
+        gap: var(--space-lg);
+    }
+    .expertise-card {
+        padding: var(--space-xl);
     }
 }
