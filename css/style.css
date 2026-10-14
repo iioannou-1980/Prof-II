@@ -1029,19 +1029,23 @@ p:last-child {
     margin-top: 44px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: var(--space-md);
     flex-wrap: wrap;
 }
 
-.hero-film-caption {
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
+/* Wider screens: give the film more of the hero */
+@media (min-width: 1280px) {
+    .hero-grid--film {
+        grid-template-columns: 1fr 1.5fr;
+        gap: var(--space-2xl);
+    }
+    .hero-grid--film .hero-film {
+        max-width: none;
+    }
 }
 
-.hero-film-caption strong {
-    color: var(--color-primary);
-    font-weight: 600;
+.hero-title .nowrap {
+    white-space: nowrap;
 }
 
 .film-sound-btn {
